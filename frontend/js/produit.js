@@ -8,30 +8,21 @@ fetch(`http://localhost:3000/api/furniture/${id}`)
     }
 })
 .then(function(thing) {
-    console.log(thing);
-    price = thing.price/100
-    let content = document.getElementById("mainContent")
-    const widthproduct = 10
-    content.innerHTML +=`
-    <div class='col-sm-${widthproduct}'>
-        <div class='card' style='margin:25px;'>
-            <img src='${thing.imageUrl}' class='card-img-top' alt='...' style='height:350px;object-fit: cover;'> 
-            <div class='card-body'> 
-                <h5 class='card-title'>${thing.name}</h5>
-                <p class='card-text'>${thing.description}</p>
-                <select class="form-select" aria-label="Default select example">
-                </select>
-                <p class='card-text'> Prix: ${price}€</p>
-                <a href='panier.html' class='btn btn-success'>Ajouter au panier</a>
-            </div>
-        </div>
-    </div>`
-    let select = document.getElementsByClassName("form_select")
-    for (element of thing.varnish){
-        console.log(element)
-        select.innerHTML +=`<option value='${element}'>${element}</option>`
-    }
+    document.getElementById("mainContent").innerHTML += renderProductBox(10, thing, "single");
+    document.getElementById("ajouterAuPanier").addEventListener('click', function()
+    {
+        localStorage.setItem('products', id);
+        alert('le produit as bien été ajouté au panier');
+        disable("ajouterAuPanier")
+        
+    })
 })
 .catch(function(err) {
     // Une erreur est survenue
 });
+
+function disable(id) {
+    document.getElementById(id).setAttribute('disabled', true);
+    document.getElementById(id).style.opacity = 0.5;
+    document.getElementById(id).style.cursor = 'not-allowed';
+}
