@@ -30,3 +30,14 @@ function renderProductBox(width, thing, type) {
 function moneyConvert(price) {
     return Math.round(price/100, 2) + ' €' //divise par 100 et arrondis
 }
+
+function checkIfItemExists (id) {
+    const items = localStorage.getItem('products')
+    let itemExists = false
+    if (items) {
+        const itemsData = JSON.parse(items)
+        itemExists =  itemsData.includes(id)
+    }
+  
+    return itemExists
+}

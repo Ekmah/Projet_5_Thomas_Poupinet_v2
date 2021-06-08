@@ -15,7 +15,6 @@ fetch(`http://localhost:3000/api/furniture/${id}`)
     document.getElementById("ajouterAuPanier").addEventListener('click', function() {
         ids = [id]
         array = localStorage.getItem('products')
-        console.log(array)
         if (array) {
             array = JSON.parse(array)
             array.push(id)
@@ -23,7 +22,6 @@ fetch(`http://localhost:3000/api/furniture/${id}`)
         }
         else {
             localStorage.setItem('products', JSON.stringify(ids))
-            console.log("created")
         }
         alert('le produit as bien été ajouté au panier')
         disable("ajouterAuPanier")
@@ -40,13 +38,3 @@ function disable(id) {
     document.getElementById(id).style.cursor = 'not-allowed';
 }
 
-function checkIfItemExists (id) {
-    const items = localStorage.getItem('products')
-    let itemExists = false
-    if (items) {
-        const itemsData = JSON.parse(items)
-        itemExists =  itemsData.includes(id)
-    }
-  
-    return itemExists
-}
