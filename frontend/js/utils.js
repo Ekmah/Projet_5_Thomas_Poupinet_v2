@@ -38,7 +38,7 @@ function renderProductCart(width, thing) {
                 <div class="card-body">
                     <h5 class="card-title">${thing.name}</h5>
                     <p class="card-text">${thing.description}</p>
-                    <p class="card-text"> Prix: ${moneyConvert(thing.price)}€</p>
+                    <p class="card-text"> Prix: ${moneyConvert(thing.price)}</p>
                     <a href="panier.html" class='btn btn-danger' id='enleverDuPanier' onclick='delLocalElement(${thing._id})'>Supprimer</a>
                 </div>
             </div>
