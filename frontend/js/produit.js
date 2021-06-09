@@ -24,9 +24,9 @@ fetch(`http://localhost:3000/api/furniture/${id}`)
         else {
             localStorage.setItem('products', JSON.stringify(ids))
         }
-        alert('le produit as bien été ajouté au panier')
         showSaved()
         disable("ajouterAuPanier")
+        alert('le produit as bien été ajouté au panier')
         
     })
 })

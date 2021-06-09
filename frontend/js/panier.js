@@ -23,7 +23,6 @@ for (id of items) {
             else {
                 localStorage.setItem('products', JSON.stringify(ids))
             }
-            alert('le produit as bien été supprimé du panier')
             
         })
     })
