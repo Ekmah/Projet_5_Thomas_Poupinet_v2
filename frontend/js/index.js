@@ -9,6 +9,7 @@ fetch('http://localhost:3000/api/furniture')
     for (thing of value) {
         document.getElementById("mainContent").innerHTML += renderProductBox(5, thing, "multi")
     }
+    showSaved()
 })
 .catch(function(err) {
     // Une erreur est survenue

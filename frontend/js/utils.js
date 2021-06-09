@@ -27,6 +27,33 @@ function renderProductBox(width, thing, type) {
     </div>
     `
 }
+function renderProductCart(width, thing) {
+    let options = '';
+    let height = '250';
+    return `
+    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0" style='height:${height}px;'>
+            <img class="col-sm-4" src="${thing.imageUrl}" alt="..." style='height:${height}px;object-fit: cover;'>
+            <div class="col-sm-8">
+                <div class="card-body">
+                    <h5 class="card-title">${thing.name}</h5>
+                    <p class="card-text">${thing.description}</p>
+                    <p class="card-text"> Prix: ${moneyConvert(thing.price)}€</p>
+                    <a href="panier.html" class='btn btn-danger' id='enleverDuPanier' onclick='delLocalElement(${thing._id})'>Supprimer</a>
+                </div>
+            </div>
+        </div>
+    </div>`
+}
+function delLocalElement(id){
+    array = localStorage.getItem('products')
+    array = JSON.parse(array)
+    index = array.indexOf(id)
+    array.splice(id, 1)
+    localStorage.setItem('products', JSON.stringify(array))
+    alert('le produit as bien été supprimé du panier')
+}
+
 function moneyConvert(price) {
     return Math.round(price/100, 2) + ' €' //divise par 100 et arrondis
 }
@@ -40,4 +67,16 @@ function checkIfItemExists (id) {
     }
   
     return itemExists
+}
+function showSaved () {
+    let items = localStorage.getItem("products");
+    items = JSON.parse(items);
+    let number_items = 0
+    for (item in items){
+        number_items+=1
+    }
+    if (number_items>0){
+        document.getElementById("notify-bubble").innerText = number_items
+        document.getElementById("notify-bubble").style.display = 'block';
+    }
 }

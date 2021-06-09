@@ -12,6 +12,7 @@ fetch(`http://localhost:3000/api/furniture/${id}`)
     if (checkIfItemExists(id) !== false) {
         disable("ajouterAuPanier");
     }
+    showSaved()
     document.getElementById("ajouterAuPanier").addEventListener('click', function() {
         ids = [id]
         array = localStorage.getItem('products')
@@ -24,6 +25,7 @@ fetch(`http://localhost:3000/api/furniture/${id}`)
             localStorage.setItem('products', JSON.stringify(ids))
         }
         alert('le produit as bien été ajouté au panier')
+        showSaved()
         disable("ajouterAuPanier")
         
     })

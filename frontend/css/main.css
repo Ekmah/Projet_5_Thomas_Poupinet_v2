@@ -1,0 +1,17 @@
+.notify-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+.notify-bubble {
+    position: absolute;
+    top: -8px;
+    right: -7px;
+    padding: 1px 6px 3px 6px;
+    background-color: green;
+    color: white;
+    font-size: 0.65em;
+    border-radius: 50%;
+    box-shadow: 1px 1px 1px gray;
+    display: none;
+}
