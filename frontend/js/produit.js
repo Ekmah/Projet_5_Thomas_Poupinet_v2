@@ -1,5 +1,6 @@
 const params = new URLSearchParams(window.location.search)
 const id = params.get("id");
+showSaved()
 
 fetch(`http://localhost:3000/api/furniture/${id}`)
 .then(function(res) {
@@ -12,18 +13,15 @@ fetch(`http://localhost:3000/api/furniture/${id}`)
     if (checkIfItemExists(id) !== false) {
         disable("ajouterAuPanier");
     }
-    showSaved()
+    
     document.getElementById("ajouterAuPanier").addEventListener('click', function() {
-        ids = [id]
-        array = localStorage.getItem('products')
-        if (array) {
-            array = JSON.parse(array)
-            array.push(id)
-            localStorage.setItem('products', JSON.stringify(array))
+        let products = [id]
+        if (Storage.has('products')) {
+            products = Storage.get('products')
+            products.push(id)
+            
         }
-        else {
-            localStorage.setItem('products', JSON.stringify(ids))
-        }
+        Storage.store('products', products)
         showSaved()
         disable("ajouterAuPanier")
         alert('le produit as bien été ajouté au panier')
@@ -33,10 +31,3 @@ fetch(`http://localhost:3000/api/furniture/${id}`)
 .catch(function(err) {
     // Une erreur est survenue
 });
-
-function disable(id) {
-    document.getElementById(id).setAttribute('disabled', true);
-    document.getElementById(id).style.opacity = 0.5;
-    document.getElementById(id).style.cursor = 'not-allowed';
-}
-

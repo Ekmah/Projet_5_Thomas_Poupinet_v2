@@ -1,6 +1,4 @@
-let items = localStorage.getItem("products");
-items = JSON.parse(items);
-console.log(items)
+let items = Storage.get("products");
 showSaved()
 for (id of items) {
     fetch(`http://localhost:3000/api/furniture/${id}`)
@@ -11,19 +9,18 @@ for (id of items) {
     })
     .then(function(thing) {
         document.getElementById("mainContent").innerHTML += renderProductCart("5", thing)
-        document.getElementById("enleverDuPanier").addEventListener('click', function() {
-            ids = [id]
-            array = localStorage.getItem('products')
-            if (array) {
-                array = JSON.parse(array)
-                index = array.indexOf(id)
-                array.splice(id, 1)
-                localStorage.setItem('products', JSON.stringify(array))
-            }
-            else {
-                localStorage.setItem('products', JSON.stringify(ids))
-            }
-            
-        })
+        window.setTimeout(() => {
+            document.getElementById(thing._id).addEventListener('click', function(e) {
+                let itemId = e.target.getAttribute('id')
+                let products = [itemId]
+                if (Storage.has('products')) {
+                    products = Storage.get('products')
+                    index = products.indexOf(itemId)
+                    products.splice(index, 1)
+                }
+                Storage.store('products', products)
+                window.location.reload()
+            })
+        },1000)
     })
 }

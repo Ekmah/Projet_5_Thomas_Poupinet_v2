@@ -27,6 +27,7 @@ function renderProductBox(width, thing, type) {
     </div>
     `
 }
+
 function renderProductCart(width, thing) {
     let options = '';
     let height = '250';
@@ -39,19 +40,11 @@ function renderProductCart(width, thing) {
                     <h5 class="card-title">${thing.name}</h5>
                     <p class="card-text">${thing.description}</p>
                     <p class="card-text"> Prix: ${moneyConvert(thing.price)}</p>
-                    <a href="panier.html" class='btn btn-danger' id='enleverDuPanier' onclick='delLocalElement(${thing._id})'>Supprimer</a>
+                    <span class='btn btn-danger' id='${thing._id}'>Supprimer</span>
                 </div>
             </div>
         </div>
     </div>`
-}
-function delLocalElement(id){
-    array = localStorage.getItem('products')
-    array = JSON.parse(array)
-    index = array.indexOf(id)
-    array.splice(id, 1)
-    localStorage.setItem('products', JSON.stringify(array))
-    alert('le produit as bien été supprimé du panier')
 }
 
 function moneyConvert(price) {
@@ -59,24 +52,29 @@ function moneyConvert(price) {
 }
 
 function checkIfItemExists (id) {
-    const items = localStorage.getItem('products')
-    let itemExists = false
-    if (items) {
-        const itemsData = JSON.parse(items)
-        itemExists =  itemsData.includes(id)
+    if(!Storage.has('products')){
+        return false
     }
-  
-    return itemExists
+    return (Storage.get('products').includes(id))
 }
+
 function showSaved () {
-    let items = localStorage.getItem("products");
-    items = JSON.parse(items);
-    let number_items = 0
-    for (item in items){
-        number_items+=1
-    }
+    let number_items = numberOfProductsINCart()
     if (number_items>0){
         document.getElementById("notify-bubble").innerText = number_items
         document.getElementById("notify-bubble").style.display = 'block';
     }
+}
+
+function numberOfProductsINCart(){
+    if (!Storage.has('products')){
+        return 0
+    }
+    return Storage.get('products').length
+}
+
+function disable(id) {
+    document.getElementById(id).setAttribute('disabled', true);
+    document.getElementById(id).style.opacity = 0.5;
+    document.getElementById(id).style.cursor = 'not-allowed';
 }
