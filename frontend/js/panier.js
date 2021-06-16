@@ -22,5 +22,21 @@ for (id of items) {
                 window.location.reload()
             })
         },1000)
+        let adress = $('#inputAddress')
+        adress.change(testFormSimple()).keyup(function() {
+            $(this).change();
+        });
+        let city = $('#inputCity')
+        city.change(testFormSimple()).keyup(function() {
+            $(this).change();
+        });
+        let FirstName = $('#inputFirstName')
+        FirstName.change(testFormSimple()).keyup(function() {
+            $(this).change();
+        });
+        let LastName = $('#inputLastName')
+        LastName.change(testFormSimple()).keyup(function() {
+            $(this).change();
+        });
     })
 }

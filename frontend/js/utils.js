@@ -78,3 +78,10 @@ function disable(id) {
     document.getElementById(id).style.opacity = 0.5;
     document.getElementById(id).style.cursor = 'not-allowed';
 }
+
+function testFormSimple() {
+    let value = adress.val()
+    if ( value.length == 0) {
+        disable(send_order)
+    }
+}
