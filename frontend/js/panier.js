@@ -68,14 +68,13 @@ for (id of items) {
                 "contact": {
                     "firstName": firstName,
                     "lastName": lastName,
-                    "address": address,
+                    "address": adress,
                     "city": city,
                     "email": email
                 },
-                "products":[]
-                
+                "products":Storage.get("produtcs")
             }
-            
+            fetch(`http://localhost:3000/api/furniture/order`, request)
         })
     })
 }
