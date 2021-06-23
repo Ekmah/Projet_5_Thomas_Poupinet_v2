@@ -1,3 +1,6 @@
+
+
+
 const params = new URLSearchParams(window.location.search)
 const adress = params.get("adress");
 const city = params.get("city");

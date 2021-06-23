@@ -1,10 +1,10 @@
-class Storage{
+class StorageClass{
     constructor(){
         this.engine = localStorage;
     }
 
     has(id){
-        return !! this.engine.get(id);
+        return !! this.engine.getItem(id);
     }
 
     get(id){
@@ -22,3 +22,4 @@ class Storage{
         this.engine.clear();
     }
 }
+let Storage = new StorageClass();

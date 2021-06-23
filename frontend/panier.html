@@ -8,10 +8,9 @@
 
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
-        
+        <script type="text/javascript" src="js/Storage.js" defer></script>
         <script type="text/javascript" src="js/utils.js" defer></script>
         <script type="text/javascript" src="js/panier.js" defer></script>
-        <script type="text/javascript" src="js/Storage.js" defer></script>
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" 
                 integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" 
                 crossorigin="anonymous">
@@ -48,22 +47,22 @@
                 </div>
                 <div class="col-md-6">
                   <label for="inputCity" class="form-label">City</label>
-                  <input type="text" class="form-control" id="inputCity" name="city" required>
+                  <input type="text" class="form-control" id="inputCity" name="city">
                 </div>
                 <div class="col-md-6">
                   <label for="inputEmail4" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="inputEmail" name="email" required>
+                  <input type="email" class="form-control" id="inputEmail" name="email">
                 </div>
                 <div class="col-md-6">
                   <label for="inputDate4" class="form-label">First Name</label>
-                  <input type="text" class="form-control" id="inputFirstName" name="firstname" required>
+                  <input type="text" class="form-control" id="inputFirstName" name="firstname">
                 </div>
                 <div class="col-md-6">
                   <label for="inputDate4" class="form-label">Last Name</label>
-                  <input type="text" class="form-control" id="inputLastName" name="lastname" required>
+                  <input type="text" class="form-control" id="inputLastName" name="lastname">
                 </div>
                 <div class="col-12">
-                  <button type="submit" id="send_order" class="btn btn-primary">Pass Command</button>
+                  <button type="button" id="send_order" class="btn btn-primary disabled">Pass Command</button>
                 </div>
               </form>
         </main>
