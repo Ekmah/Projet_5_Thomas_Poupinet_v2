@@ -15,14 +15,14 @@ for (id of items) {
         }, 1000)
         let adress = false
         let city = false
-        let firstname = false
-        let lastname = false
+        let firstName = false
+        let lastName = false
         let email = false
         document.getElementById("inputAddress").addEventListener('keyup', function(k) {
             let value = k.target.value
             if (value.length >= 1){
-                adress = true
-                if (email === true && lastname === true && firstname === true && city === true && adress === true){
+                adress = value
+                if (email && lastName && firstName && city && adress ){
                     document.getElementById("send_order").classList.remove("disabled")
                 }
             }
@@ -30,8 +30,8 @@ for (id of items) {
         document.getElementById("inputCity").addEventListener('keyup', function(k) {
             let value = k.target.value
             if (value.length >= 1){
-                city = true
-                if (email === true && lastname === true && firstname === true && city === true && adress === true){
+                city = value
+                if (email && lastName && firstname && city && adress ){
                     document.getElementById("send_order").classList.remove("disabled")
                 }
             }
@@ -39,8 +39,8 @@ for (id of items) {
         document.getElementById("inputFirstName").addEventListener('keyup', function(k) {
             let value = k.target.value
             if (value.length >= 1){
-                firstname = true
-                if (email === true && lastname === true && firstname === true && city === true && adress === true){
+                firstName = value
+                if (email && lastName && firstName && city && adress ){
                     document.getElementById("send_order").classList.remove("disabled")
                 }
             }
@@ -48,8 +48,8 @@ for (id of items) {
         document.getElementById("inputLastName").addEventListener('keyup', function(k) {
             let value = k.target.value
             if (value.length >= 1){
-                lastname = true
-                if (email === true && lastname === true && firstname === true && city === true && adress === true){
+                lastName = value
+                if (email && lastName && firstName && city && adress ){
                     document.getElementById("send_order").classList.remove("disabled")
                 }
             }
@@ -57,14 +57,24 @@ for (id of items) {
         document.getElementById("inputEmail").addEventListener('keyup', function(k) {
             let value = k.target.value
             if (value.length >= 1 && value.includes("@")){
-                email = true
-                if (email === true && lastname === true && firstname === true && city === true && adress === true){
+                email = value
+                if (email && lastName && firstName && city && adress ){
                     document.getElementById("send_order").classList.remove("disabled")
                 }
             }
         })
         document.getElementById("send_order").addEventListener('click', function(z) {
-            
+            request = {
+                "contact": {
+                    "firstName": firstName,
+                    "lastName": lastName,
+                    "address": address,
+                    "city": city,
+                    "email": email
+                },
+                "products":[]
+                
+            }
             
         })
     })
