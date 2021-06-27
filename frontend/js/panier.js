@@ -106,6 +106,7 @@ fetch(`http://localhost:3000/api/furniture/`)
             }
         })
         .then((a) =>{
+            Storage.clear('products')
             window.location = `order.html?orderId=${a.orderId}`
         })
     })
