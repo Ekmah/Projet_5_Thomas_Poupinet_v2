@@ -20,7 +20,7 @@ function renderProductBox(width, thing, type) {
                 <h5 class='card-title'>${thing.name}</h5>
                 <p class='card-text'>${thing.description}</p>
                 ${options}
-                <p class='card-text'> Prix: ${moneyConvert(thing.price)}€</p>
+                <p class='card-text'> Prix: ${moneyConvert(thing.price)}</p>
                 ${button}
             </div>
         </div>

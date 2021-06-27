@@ -1,6 +1,50 @@
 
 let items = Storage.get("products");
+let addressValid = false
+let cityValid = false
+let firstNameValid = false
+let lastNameValid = false
+let emailValid = false
+
 showSaved()
+
+function checkForm(){
+
+    disableSubmitButton()
+
+    if (addressValid && cityValid && firstNameValid && lastNameValid && emailValid) {
+        enableSubmitButton()
+    }
+}
+
+function showError(element){
+    element.classList.add('is-invalid')
+}
+
+function hideError(element){
+    element.classList.remove('is-invalid')
+}
+
+function listenForm(id){
+    document.getElementById(id).addEventListener('keyup', function(e) {
+        let value = e.target.value
+        showError(e.target)
+        if (!id.includes("mail")){
+            if (value.length >= 1){
+                checkForm()
+                hideError(e.target)
+            }
+        }
+        else {
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+/
+            if (value.length >= 1 && value.match(regex)){
+                checkForm()
+                hideError(e.target)
+            }
+        }
+    })
+}
+
 for (id of items) {
     fetch(`http://localhost:3000/api/furniture/${id}`)
     .then(function(res) {
@@ -13,68 +57,25 @@ for (id of items) {
         window.setTimeout(() => {
         document.getElementById(thing._id).addEventListener('click', removeProduct)
         }, 1000)
-        let adress = false
-        let city = false
-        let firstName = false
-        let lastName = false
-        let email = false
-        document.getElementById("inputAddress").addEventListener('keyup', function(k) {
-            let value = k.target.value
-            if (value.length >= 1){
-                adress = value
-                if (email && lastName && firstName && city && adress ){
-                    document.getElementById("send_order").classList.remove("disabled")
-                }
-            }
-        })
-        document.getElementById("inputCity").addEventListener('keyup', function(k) {
-            let value = k.target.value
-            if (value.length >= 1){
-                city = value
-                if (email && lastName && firstname && city && adress ){
-                    document.getElementById("send_order").classList.remove("disabled")
-                }
-            }
-        })
-        document.getElementById("inputFirstName").addEventListener('keyup', function(k) {
-            let value = k.target.value
-            if (value.length >= 1){
-                firstName = value
-                if (email && lastName && firstName && city && adress ){
-                    document.getElementById("send_order").classList.remove("disabled")
-                }
-            }
-        })
-        document.getElementById("inputLastName").addEventListener('keyup', function(k) {
-            let value = k.target.value
-            if (value.length >= 1){
-                lastName = value
-                if (email && lastName && firstName && city && adress ){
-                    document.getElementById("send_order").classList.remove("disabled")
-                }
-            }
-        })
-        document.getElementById("inputEmail").addEventListener('keyup', function(k) {
-            let value = k.target.value
-            if (value.length >= 1 && value.includes("@")){
-                email = value
-                if (email && lastName && firstName && city && adress ){
-                    document.getElementById("send_order").classList.remove("disabled")
-                }
-            }
-        })
-        document.getElementById("send_order").addEventListener('click', function(z) {
-            request = {
+        listenForm("inputAddress")
+        listenForm("inputCity")
+        listenForm("inputFirstName")
+        listenForm("inputLastName")
+        listenForm("inputEmail")
+        document.getElementById("send_order").addEventListener('click', function(e) {
+            e.preventDefault()
+            payload = {
                 "contact": {
-                    "firstName": firstName,
-                    "lastName": lastName,
-                    "address": adress,
-                    "city": city,
-                    "email": email
+                    "firstName": document.getElementById("inputFirstName").value,
+                    "lastName": document.getElementById("inputLastName").value,
+                    "address": document.getElementById("inputAddress").value,
+                    "city": document.getElementById("inputCity").value,
+                    "email": document.getElementById("inputEmail").value
                 },
-                "products":Storage.get("produtcs")
+                "products":Storage.get("products")
             }
-            fetch(`http://localhost:3000/api/furniture/order`, request)
+            console.log(payload)
+            // fetch(`http://localhost:3000/api/furniture/order`, payload)
         })
     })
 }
@@ -89,4 +90,17 @@ function removeProduct (e) {
     }
     Storage.store('products', products)
     window.location.reload()
+}
+
+function enableSubmitButton() {
+    let element = document.getElementById("send_order")
+    if (element.classList.contains('disabled')){
+        element.classList.remove("disabled")
+    }
+}
+function disableSubmitButton() {
+    let element = document.getElementById("send_order")
+    if (!element.classList.contains('disabled')){
+        element.classList.add("disabled")
+    }
 }
