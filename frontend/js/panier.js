@@ -29,8 +29,20 @@ function listenForm(id){
     document.getElementById(id).addEventListener('keyup', function(e) {
         let value = e.target.value
         showError(e.target)
-        if (!id.includes("mail")){
+        if (!id.includes("inputEmail")){
             if (value.length >= 1){
+                if (id.includes("inputAddres")){
+                    addressValid = true
+                }
+                if (id.includes("inputCity")){
+                    cityValid = true
+                }
+                if (id.includes("inputFirstName")){
+                    firstNameValid = true
+                }
+                if (id.includes("inputLastName")){
+                    lastNameValid = true
+                }
                 checkForm()
                 hideError(e.target)
             }
@@ -38,6 +50,7 @@ function listenForm(id){
         else {
             const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+/
             if (value.length >= 1 && value.match(regex)){
+                emailValid = true
                 checkForm()
                 hideError(e.target)
             }
@@ -45,40 +58,58 @@ function listenForm(id){
     })
 }
 
-for (id of items) {
-    fetch(`http://localhost:3000/api/furniture/${id}`)
-    .then(function(res) {
-        if (res.ok) {
-            return res.json();
-        }
-    })
-    .then(function(thing) {
-        document.getElementById("mainContent").innerHTML += renderProductCart("5", thing)
-        window.setTimeout(() => {
-        document.getElementById(thing._id).addEventListener('click', removeProduct)
-        }, 1000)
-        listenForm("inputAddress")
-        listenForm("inputCity")
-        listenForm("inputFirstName")
-        listenForm("inputLastName")
-        listenForm("inputEmail")
-        document.getElementById("send_order").addEventListener('click', function(e) {
-            e.preventDefault()
-            payload = {
-                "contact": {
-                    "firstName": document.getElementById("inputFirstName").value,
-                    "lastName": document.getElementById("inputLastName").value,
-                    "address": document.getElementById("inputAddress").value,
-                    "city": document.getElementById("inputCity").value,
-                    "email": document.getElementById("inputEmail").value
-                },
-                "products":Storage.get("products")
+fetch(`http://localhost:3000/api/furniture/`)
+.then(function(res) {
+    if (res.ok) {
+        return res.json();
+    }
+})
+.then(function(things) {
+    for (thing of things){
+        for (id of items){
+            if (id == thing._id){
+                document.getElementById("mainContent").innerHTML += renderProductCart("5", thing)
             }
-            console.log(payload)
-            // fetch(`http://localhost:3000/api/furniture/order`, payload)
+        }
+    }
+    for (id of items){
+        document.getElementById(id).addEventListener('click', removeProduct)
+    }
+    listenForm("inputAddress")
+    listenForm("inputCity")
+    listenForm("inputFirstName")
+    listenForm("inputLastName")
+    listenForm("inputEmail")
+    document.getElementById("send_order").addEventListener('click', function(e) {
+        e.preventDefault()
+        payload = {
+            "contact": {
+                "firstName": document.getElementById("inputFirstName").value,
+                "lastName": document.getElementById("inputLastName").value,
+                "address": document.getElementById("inputAddress").value,
+                "city": document.getElementById("inputCity").value,
+                "email": document.getElementById("inputEmail").value
+            },
+            "products":Storage.get("products")
+        }
+        console.log(payload)
+        fetch(`http://localhost:3000/api/furniture/order`, {
+        headers: {
+            'Content-Type': "application/json"
+        },
+        method: 'POST',
+        body: JSON.stringify(payload)
+        })
+        .then(function(res) {
+            if (res.ok) {
+                return res.json();
+            }
+        })
+        .then((a) =>{
+            window.location = `order.html?orderId=${a.orderId}`
         })
     })
-}
+})
 
 function removeProduct (e) {
     let itemId = e.target.getAttribute('id')
