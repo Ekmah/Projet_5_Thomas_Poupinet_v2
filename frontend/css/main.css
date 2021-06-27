@@ -1,3 +1,20 @@
+html {
+  height:100%;
+}
+body{
+  height:100%;
+}
+main {
+  background:no-repeat linear-gradient(145deg, #e68a09, #8f5bfe);
+  min-width:100%;
+  min-height:100%;
+}
+.nameLink:hover{
+  color:black;
+}
+.nameLink{
+  color:black;
+}
 .notify-container {
     position: relative;
     display: inline-block;
