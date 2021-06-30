@@ -11,8 +11,9 @@ showSaved()
 function checkForm(){
 
     disableSubmitButton()
-
+    console.log("passed")
     if (addressValid && cityValid && firstNameValid && lastNameValid && emailValid) {
+        console.log("all valid?")
         enableSubmitButton()
     }
 }
@@ -46,6 +47,21 @@ function listenForm(id){
                 checkForm()
                 hideError(e.target)
             }
+            else{
+                if (id.includes("inputAddres")){
+                    addressValid = false
+                }
+                if (id.includes("inputCity")){
+                    cityValid = false
+                }
+                if (id.includes("inputFirstName")){
+                    firstNameValid = false
+                }
+                if (id.includes("inputLastName")){
+                    lastNameValid = false
+                }
+                checkForm()
+            }
         }
         else {
             const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+/
@@ -53,6 +69,10 @@ function listenForm(id){
                 emailValid = true
                 checkForm()
                 hideError(e.target)
+            }
+            else{
+                emailValid = false
+                checkForm()
             }
         }
     })
