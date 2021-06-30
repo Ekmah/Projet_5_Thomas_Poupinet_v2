@@ -85,3 +85,26 @@ function testFormSimple() {
         disable(send_order)
     }
 }
+
+// function totalPrice(ids){
+//     let priceTotal = 0
+//     items = Storage.get(ids)
+//     console.log(items)
+//     fetch(`http://localhost:3000/api/furniture/`)
+//     .then(function(res) {
+//         if (res.ok) {
+//             return res.json();
+//         }
+//     })
+//     .then(function(things) {
+//         for (thing of things){
+//             for (id of items){
+//                 if (id == thing._id){
+//                     priceTotal += thing.price
+//                 }
+//             }
+//         }
+//         priceTotal = moneyConvert(priceTotal)
+//         return priceTotal
+//     })
+// }

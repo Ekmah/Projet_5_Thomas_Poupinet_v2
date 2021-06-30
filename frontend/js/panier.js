@@ -57,7 +57,7 @@ function listenForm(id){
         }
     })
 }
-
+let totalPrice = 0
 fetch(`http://localhost:3000/api/furniture/`)
 .then(function(res) {
     if (res.ok) {
@@ -68,10 +68,12 @@ fetch(`http://localhost:3000/api/furniture/`)
     for (thing of things){
         for (id of items){
             if (id == thing._id){
+                totalPrice += thing.price
                 document.getElementById("mainContent").innerHTML += renderProductCart("5", thing)
             }
         }
     }
+    document.getElementById("totalPrice").innerHTML += moneyConvert(totalPrice)
     for (id of items){
         document.getElementById(id).addEventListener('click', removeProduct)
     }
@@ -108,7 +110,7 @@ fetch(`http://localhost:3000/api/furniture/`)
             })
             .then((a) =>{
                 Storage.clear('products')
-                window.location = `order.html?orderId=${a.orderId}`
+                window.location = `order.html?orderId=${a.orderId}&totalPrice=${moneyConvert(totalPrice)}`
             })
         }   
     })
