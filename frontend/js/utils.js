@@ -33,8 +33,8 @@ function renderProductCart(width, thing) {
     let height = '250';
     return `
     <div class="card mb-3" style="max-width: 540px;">
-        <div class="row g-0" style='height:${height}px;'>
-            <img class="col-sm-4" src="${thing.imageUrl}" alt="..." style='height:${height}px;object-fit: cover;'>
+        <div class="row g-0" style=''>
+            <img class="col-sm-4" src="${thing.imageUrl}" alt="..." style='object-fit: cover;'>
             <div class="col-sm-8">
                 <div class="card-body">
                     <h5 class="card-title">${thing.name}</h5>

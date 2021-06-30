@@ -82,33 +82,35 @@ fetch(`http://localhost:3000/api/furniture/`)
     listenForm("inputEmail")
     document.getElementById("send_order").addEventListener('click', function(e) {
         e.preventDefault()
-        payload = {
-            "contact": {
-                "firstName": document.getElementById("inputFirstName").value,
-                "lastName": document.getElementById("inputLastName").value,
-                "address": document.getElementById("inputAddress").value,
-                "city": document.getElementById("inputCity").value,
-                "email": document.getElementById("inputEmail").value
-            },
-            "products":Storage.get("products")
-        }
-        console.log(payload)
-        fetch(`http://localhost:3000/api/furniture/order`, {
-        headers: {
-            'Content-Type': "application/json"
-        },
-        method: 'POST',
-        body: JSON.stringify(payload)
-        })
-        .then(function(res) {
-            if (res.ok) {
-                return res.json();
+        if (!e.target.classList.contains("disabled")){
+            payload = {
+                "contact": {
+                    "firstName": document.getElementById("inputFirstName").value,
+                    "lastName": document.getElementById("inputLastName").value,
+                    "address": document.getElementById("inputAddress").value,
+                    "city": document.getElementById("inputCity").value,
+                    "email": document.getElementById("inputEmail").value
+                },
+                "products":Storage.get("products")
             }
-        })
-        .then((a) =>{
-            Storage.clear('products')
-            window.location = `order.html?orderId=${a.orderId}`
-        })
+            console.log(payload)
+            fetch(`http://localhost:3000/api/furniture/order`, {
+            headers: {
+                'Content-Type': "application/json"
+            },
+            method: 'POST',
+            body: JSON.stringify(payload)
+            })
+            .then(function(res) {
+                if (res.ok) {
+                    return res.json();
+                }
+            })
+            .then((a) =>{
+                Storage.clear('products')
+                window.location = `order.html?orderId=${a.orderId}`
+            })
+        }   
     })
 })
 

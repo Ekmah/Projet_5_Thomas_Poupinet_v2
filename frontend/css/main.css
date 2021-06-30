@@ -4,6 +4,10 @@ html {
 body{
   height:100%;
 }
+.disabled{
+  background-color: lightgray !important;
+  border-color: lightgray !important;
+}
 main {
   background:no-repeat linear-gradient(145deg, #e68a09, #8f5bfe);
   min-width:100%;
