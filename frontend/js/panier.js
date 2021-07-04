@@ -8,6 +8,64 @@ let emailValid = false
 
 showSaved()
 
+let totalPrice = 0
+fetch(`http://localhost:3000/api/furniture/`)
+.then(function(res) {
+    if (res.ok) {
+        return res.json();
+    }
+})
+.then(function(things) {
+    for (thing of things){
+        for (id of items){
+            if (id == thing._id){
+                totalPrice += thing.price
+                document.getElementById("mainContent").innerHTML += renderProductCart("5", thing)
+            }
+        }
+    }
+    document.getElementById("totalPrice").innerHTML += moneyConvert(totalPrice)
+    for (id of items){
+        document.getElementById(id).addEventListener('click', removeProduct)
+    }
+    listenForm("inputAddress")
+    listenForm("inputCity")
+    listenForm("inputFirstName")
+    listenForm("inputLastName")
+    listenForm("inputEmail")
+    document.getElementById("send_order").addEventListener('click', function(e) {
+        e.preventDefault()
+        if (!e.target.classList.contains("disabled")){
+            payload = {
+                "contact": {
+                    "firstName": document.getElementById("inputFirstName").value,
+                    "lastName": document.getElementById("inputLastName").value,
+                    "address": document.getElementById("inputAddress").value,
+                    "city": document.getElementById("inputCity").value,
+                    "email": document.getElementById("inputEmail").value
+                },
+                "products":Storage.get("products")
+            }
+            console.log(payload)
+            fetch(`http://localhost:3000/api/furniture/order`, {
+            headers: {
+                'Content-Type': "application/json"
+            },
+            method: 'POST',
+            body: JSON.stringify(payload)
+            })
+            .then(function(res) {
+                if (res.ok) {
+                    return res.json();
+                }
+            })
+            .then((a) =>{
+                Storage.clear('products')
+                window.location = `order.html?orderId=${a.orderId}&totalPrice=${moneyConvert(totalPrice)}`
+            })
+        }   
+    })
+})
 function checkForm(){
 
     disableSubmitButton()
@@ -77,64 +135,6 @@ function listenForm(id){
         }
     })
 }
-let totalPrice = 0
-fetch(`http://localhost:3000/api/furniture/`)
-.then(function(res) {
-    if (res.ok) {
-        return res.json();
-    }
-})
-.then(function(things) {
-    for (thing of things){
-        for (id of items){
-            if (id == thing._id){
-                totalPrice += thing.price
-                document.getElementById("mainContent").innerHTML += renderProductCart("5", thing)
-            }
-        }
-    }
-    document.getElementById("totalPrice").innerHTML += moneyConvert(totalPrice)
-    for (id of items){
-        document.getElementById(id).addEventListener('click', removeProduct)
-    }
-    listenForm("inputAddress")
-    listenForm("inputCity")
-    listenForm("inputFirstName")
-    listenForm("inputLastName")
-    listenForm("inputEmail")
-    document.getElementById("send_order").addEventListener('click', function(e) {
-        e.preventDefault()
-        if (!e.target.classList.contains("disabled")){
-            payload = {
-                "contact": {
-                    "firstName": document.getElementById("inputFirstName").value,
-                    "lastName": document.getElementById("inputLastName").value,
-                    "address": document.getElementById("inputAddress").value,
-                    "city": document.getElementById("inputCity").value,
-                    "email": document.getElementById("inputEmail").value
-                },
-                "products":Storage.get("products")
-            }
-            console.log(payload)
-            fetch(`http://localhost:3000/api/furniture/order`, {
-            headers: {
-                'Content-Type': "application/json"
-            },
-            method: 'POST',
-            body: JSON.stringify(payload)
-            })
-            .then(function(res) {
-                if (res.ok) {
-                    return res.json();
-                }
-            })
-            .then((a) =>{
-                Storage.clear('products')
-                window.location = `order.html?orderId=${a.orderId}&totalPrice=${moneyConvert(totalPrice)}`
-            })
-        }   
-    })
-})
 
 function removeProduct (e) {
     let itemId = e.target.getAttribute('id')
