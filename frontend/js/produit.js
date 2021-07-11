@@ -9,7 +9,7 @@ fetch(`http://localhost:3000/api/furniture/${id}`)
     }
 })
 .then(function(thing) {
-    document.getElementById("mainContent").innerHTML += renderProductBox(10, thing, "single")
+    document.getElementById("mainContent").innerHTML += renderProductBox(8, thing, "single")
     if (checkIfItemExists(id) !== false) {
         disable("ajouterAuPanier");
     }

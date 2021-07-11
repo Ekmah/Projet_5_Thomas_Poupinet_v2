@@ -4,35 +4,93 @@ html {
 body{
   height:100%;
 }
-.disabled{
-  background-color: lightgray !important;
-  border-color: lightgray !important;
+header {
+  background-color: #ffff;
+  margin-left: 0px;
+  margin-right: 0px;
+  max-width: 100%;
+}
+.headerLogo {
+  height:50px;
+}
+.black {
+  color:black;
+}
+.bubbleWrapPad {
+  margin-right: 20px;
 }
 main {
   background:no-repeat linear-gradient(145deg, #e68a09, #8f5bfe);
   min-width:100%;
   min-height:100% !important;
+  display: flex !important; 
+  align-content: baseline;
+  flex-wrap: wrap;
+}
+.mainCart {
+  margin:auto;
+}
+.cardCart {
+  max-width: 540px;
+}
+.mainProductPad{
+  padding-bottom: 5px;
+}
+.img {
+  object-fit: cover;
+}
+.Pad25 {
+  padding:25px;
+}
+.Mag25 {
+  margin: 25px;
+}
+.autoMargin {
+  margin: 0px auto;
+}
+.disabled{
+  background-color: lightgray !important;
+  border-color: lightgray !important;
+}
+#totalPrice {
+  background-color: white;
+  margin:20px;
+  cursor:default!important;
 }
 .nameLink:hover{
   color:black;
 }
-.nameLink{
-  color:black;
-}
 .notify-container {
-    position: relative;
-    display: inline-block;
-  }
-  
+  position: relative;
+  display: inline-block;
+}
+.sendOrderWrap {
+  margin-top: 10px;
+}
 .notify-bubble {
-    position: absolute;
-    top: -8px;
-    right: -7px;
-    padding: 1px 6px 3px 6px;
-    background-color: green;
-    color: white;
-    font-size: 0.65em;
-    border-radius: 50%;
-    box-shadow: 1px 1px 1px gray;
-    display: none;
+  position: absolute;
+  top: -8px;
+  right: -7px;
+  padding: 1px 6px 3px 6px;
+  background-color: green;
+  color: white;
+  font-size: 0.65em;
+  border-radius: 50%;
+  box-shadow: 1px 1px 1px gray;
+  display: none;
+}
+.orderMsg {
+  text-align: center; 
+  height:220px;
+  margin:50px auto;
+  width:400px; 
+  padding:20px; 
+  background-color: white; 
+  box-shadow: 10px 10px 10px black;
+}
+.orderPrice {
+  margin-top:10px;
+}
+.noMargin {
+  margin: 0px;
 }

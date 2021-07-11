@@ -13,9 +13,9 @@ function renderProductBox(width, thing, type) {
         button = `<button type='button' class='btn btn-success' id='ajouterAuPanier'>Ajouter au panier</button>`
     };
     return `
-    <div class='col-sm-${width}'>
-        <div class='card' style='margin:25px;'>
-            <img src='${thing.imageUrl}' class='card-img-top' alt='...' style='height:${height}px;object-fit: cover;'> 
+    <div class='col-sm-${width} autoMargin'>
+        <div class='card Mag25'>
+            <img src='${thing.imageUrl}' class='card-img-top img' alt='Image de ${thing.name}' style='height:${height}px;'> <!-- height is a JS variable -->
             <div class='card-body'> 
                 <h5 class='card-title'>${thing.name}</h5>
                 <p class='card-text'>${thing.description}</p>
@@ -28,13 +28,11 @@ function renderProductBox(width, thing, type) {
     `
 }
 
-function renderProductCart(width, thing) {
-    let options = '';
-    let height = '250';
+function renderProductCart(thing) {
     return `
-    <div class="card mb-3" style="max-width: 540px;">
-        <div class="row g-0" style=''>
-            <img class="col-sm-4" src="${thing.imageUrl}" alt="..." style='object-fit: cover;'>
+    <div class="card mb-3 autoMargin cardCart">
+        <div class="row g-0">
+            <img class="col-sm-4 img" src="${thing.imageUrl}" alt="Image de ${thing.name}" >
             <div class="col-sm-8">
                 <div class="card-body">
                     <h5 class="card-title">${thing.name}</h5>

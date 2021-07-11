@@ -20,7 +20,7 @@ fetch(`http://localhost:3000/api/furniture/`)
         for (id of items){
             if (id == thing._id){
                 totalPrice += thing.price
-                document.getElementById("mainContent").innerHTML += renderProductCart("5", thing)
+                document.getElementById("mainContent").innerHTML += renderProductCart(thing)
             }
         }
     }

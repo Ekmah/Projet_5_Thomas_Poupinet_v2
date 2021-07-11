@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="fr">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -20,26 +21,26 @@
         
     </head>
     <body>
-        <header class="row navbar" style="background-color: #ffff; padding-left: 0px;padding-right: 0px;margin:0px;">
+        <header class="row navbar">
             <h1>
-                <a class="nav-link nameLink" aria-current="page" href="index.html">
-                    <img src="img/logoOrinoco.png" style="height:50px" alt="">Orinoco
+                <a class="nav-link nameLink black" aria-current="page" href="index.html">
+                    <img src="img/logoOrinoco.png" class="headerLogo" alt="Logo d'Orinoco">Orinoco
                 </a>
             </h1>
             <ul class="nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="index.html">Acceuil</a>
+                    <a class="nav-link black" aria-current="page" href="index.html">Acceuil</a>
                 </li>
-                <li class="nav-item notify-container" style="margin-right: 20px;">
+                <li class="nav-item notify-container bubbleWrapPad">
                     <span class="notify-bubble" id="notify-bubble">1</span>
-                    <a class="nav-link" href="panier.html">Panier</a>
+                    <a class="nav-link black" href="panier.html">Panier</a>
                 </li>
             </ul>
         </header>
-        <main id="mainContent" style="display: flex !important; flex-wrap: wrap;">
-            <div style="text-align: center; height:220px;margin:50px auto; width:400px; padding:20px; background-color: white; box-shadow: 10px 10px 10px black;">
+        <main id="mainContent">
+            <div class="orderMsg">
                 <h4>Merci de votre commande!</h4>
-                <p style="margin:0px;">Voici l'identifiant de votre commande:</p>
+                <p class="noMargin">Voici l'identifiant de votre commande:</p>
                 <p id="orderId"></p>
             </div>
         </main>

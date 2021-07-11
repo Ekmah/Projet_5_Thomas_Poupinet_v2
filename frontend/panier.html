@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<html lang="fr">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -20,51 +21,55 @@
         
     </head>
     <body>
-      <header class="row navbar" style="background-color: #ffff; padding-left: 0px;padding-right: 0px;margin:0px;">
+      <header class="row navbar">
         <h1>
-          <a class="nav-link nameLink" aria-current="page" href="index.html">
-              <img src="img/logoOrinoco.png" style="height:50px" alt="">Orinoco
-          </a>
+            <a class="nav-link nameLink black" aria-current="page" href="index.html">
+                <img src="img/logoOrinoco.png" class="headerLogo" alt="Logo d'Orinoco">Orinoco
+            </a>
         </h1>
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="index.html">Acceuil</a>
+                <a class="nav-link black" aria-current="page" href="index.html">Acceuil</a>
             </li>
-            <li class="nav-item notify-container" style="margin-right: 20px;">
+            <li class="nav-item notify-container bubbleWrapPad">
                 <span class="notify-bubble" id="notify-bubble">1</span>
-                <a class="nav-link active" href="panier.html">Panier</a>
+                <a class="nav-link active black" href="panier.html">Panier</a>
             </li>
         </ul>
-      </header>
-      <main style="display: flex !important; flex-wrap: wrap; padding:25px;">
-          <div class="" id="mainContent">
+    </header>
+      <main class="Pad25">
+          <div class="mainCart" id="mainContent">
 
           </div>
-          <form class="col-sm-5 g-3" action="order.html"  method="get">
+          <form class="col-sm-6 g-3 autoMargin" action="order.html"  method="get">
               <div class="col-12">
                 <label for="inputAddress" class="form-label">Address</label>
                 <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" name="adress">
               </div>
-              <div class="col-md-6">
-                <label for="inputCity" class="form-label">City</label>
-                <input type="text" class="form-control" id="inputCity" name="city">
+              <div class="col-12 row">
+                <div class="col-md-6">
+                  <label for="inputCity" class="form-label">City</label>
+                  <input type="text" class="form-control" id="inputCity" name="city">
+                </div>
+                <div class="col-md-6">
+                  <label for="inputEmail" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="inputEmail" name="email">
+                </div>
               </div>
-              <div class="col-md-6">
-                <label for="inputEmail4" class="form-label">Email</label>
-                <input type="email" class="form-control" id="inputEmail" name="email">
+              <div class="col-md-12 row">
+                <div class="col-md-6">
+                  <label for="inputFirstName" class="form-label">First Name</label>
+                  <input type="text" class="form-control" id="inputFirstName" name="firstname">
+                </div>
+                <div class="col-md-6">
+                  <label for="inputLastName" class="form-label">Last Name</label>
+                  <input type="text" class="form-control" id="inputLastName" name="lastname">
+                </div>
               </div>
-              <div class="col-md-6">
-                <label for="inputDate4" class="form-label">First Name</label>
-                <input type="text" class="form-control" id="inputFirstName" name="firstname">
-              </div>
-              <div class="col-md-6">
-                <label for="inputDate4" class="form-label">Last Name</label>
-                <input type="text" class="form-control" id="inputLastName" name="lastname">
-              </div>
-              <div id="totalPrice" class="btn" style="background-color: white;margin:20px;cursor:default!important;">
+              <div id="totalPrice" class="btn">
                 prix total:
               </div>
-              <div class="col-12" style="margin-top: 10px;">
+              <div class="col-12">
                 <span type="button" id="send_order" class="btn btn-primary disabled">Pass Command</span>
               </div>
             </form>

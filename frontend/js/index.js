@@ -7,7 +7,7 @@ fetch('http://localhost:3000/api/furniture')
 })
 .then(function(value) {
     for (thing of value) {
-        document.getElementById("mainContent").innerHTML += renderProductBox(5, thing, "multi")
+        document.getElementById("mainContent").innerHTML += renderProductBox(6, thing, "multi")
     }
     showSaved()
 })
